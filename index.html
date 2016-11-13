@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Destino</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <div id="googleMap"></div>
+    <div class="logoContainer">
+        <h3>Destino { }</h3>
+        <h2>Currently: <span class="currentLocation">Wherever you are</span></h2>
+    </div>
+    <div class="infoContainer">
+        <h2 class="showInfo">Information</h2>
+    </div>
+    <div class="destinoInfo">
+        <h1 class="aboutClose">close</h1>
+        <h1>About</h1>
+        <p>Destino is a space visualization created with data from the Google Maps API. All of the stars that are shown on screen can be clicked, and a new universe will appear on screen.</p>
+        <h2>Made by: <a href="http://www.coreyrobinson.us">Corey Robinson</a></h2>
+    </div>
+    <div class="hoverDiv"></div>
+    <div class="planetInfo">
+        <h1 class="planetInfoClose">close</h1>
+        <div class="info"></div>
+    </div>
+    <script src="./main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfyzyQUD-x7V-kRhyfFZBmHd3-peMLy0o&libraries=places&callback=initMap" async defer></script>
+</body>
+</html>
