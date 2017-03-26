@@ -15,7 +15,11 @@
     <div id="googleMap"></div>
     <div class="logoContainer">
         <h3>Destino { }</h3>
-        <h2>Currently: <span class="currentLocation">Wherever you are</span></h2>
+        <h2>Currently: <span class="currentLocation">Wherever you are</span> <a class="changeLocation">(change)</a></h2>
+        <div class="inputDiv">
+            <input type="text" value="stuff">
+            <h2 class="getText">New Universe</h2>
+        </div>
     </div>
     <div class="infoContainer">
         <h2 class="showInfo">Information</h2>
@@ -31,7 +35,7 @@
         <h1 class="planetInfoClose">close</h1>
         <div class="info"></div>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmo1LqyZqyFNezXWSkr55XrzSB4zVxgWo&libraries=places"></script>
     <script src="./main.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfyzyQUD-x7V-kRhyfFZBmHd3-peMLy0o&libraries=places&callback=initMap" async defer></script>
 </body>
 </html>

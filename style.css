@@ -65,6 +65,29 @@ p {
     text-decoration: underline;
 }
 
+.changeLocation {
+    color: white;
+}
+
+.changeLocation:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.getText {
+    color: black;
+    background-color: white;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid white;
+    margin-top: 20px;
+}
+
+.getText:hover {
+    cursor: pointer;
+}
+
 .map {
     pointer-events: none;
     position: fixed;
@@ -166,6 +189,18 @@ p {
 
 .planet:hover {
     cursor: pointer;
+}
+
+input {
+    background-color: transparent;
+    box-shadow: none;
+    border: 2px solid #fff;
+    border-radius: 2px;
+    color: white;
+    margin-top: 30px;
+    padding: 10px;
+    font-family: "Catamaran";
+    font-size: 1.5em;
 }
 
 @keyframes fadeIn {

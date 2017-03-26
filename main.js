@@ -206,38 +206,12 @@ var initMap = function(location) {
                 };
 
                 service = new google.maps.places.PlacesService(map);
-                service.radarSearch(request, mapsCallback);
+                service.nearbySearch(request, mapsCallback);
             }
         })
     } else {
         // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                destino.map.headNode.pos.lat = pos.lat;
-                destino.map.headNode.pos.lng = pos.lng;
-
-                map.setCenter(pos);
-
-                var request = {
-                    location: pos,
-                    radius: '50000',
-                    types: ['store']
-                };
-
-                service = new google.maps.places.PlacesService(map);
-                service.radarSearch(request, mapsCallback);
-            }, function () {
-
-            });
-        } else {
-            console.log('no map');
-            // Browser doesn't support Geolocation
-        }
+        console.log('No location');
     }
 };
 
@@ -245,7 +219,7 @@ var limit = 0;
 var selectedPlaces = [];
 var shuffle = [];
 
-for(var i = 0; i < 200; i++) {
+for(var i = 0; i < 20; i++) {
     shuffle[i] = i;
 }
 
@@ -274,13 +248,20 @@ var  mapsCallback = function(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         destino.animate();
 
-        var detailsLoop = setInterval(function() {
-            service.getDetails({placeId: results[shuffle[limit]].place_id}, getDetails);
-            if(limit === 13) {
-                clearInterval(detailsLoop);
-            }
-            limit++;
-        }, 300);
+        for (var i = 0; i < 13; i++) {
+            var place = results[shuffle[i]];
+            console.log(place);
+            selectedPlaces.push(place);
+            destino.createPlanet(place);
+        }
+
+        // var detailsLoop = setInterval(function() {
+        //     service.getDetails({placeId: results[shuffle[limit]].place_id}, getDetails);
+        //     if(limit === 13) {
+        //         clearInterval(detailsLoop);
+        //     }
+        //     limit++;
+        // }, 300);
     }
 };
 
@@ -318,6 +299,7 @@ var animating;
 var currentPlanetObj;
 $('.planetInfo').hide();
 $('.destinoInfo').hide();
+$('.inputDiv').hide();
 
 $('body').on({
         mouseenter: function () {
@@ -385,9 +367,29 @@ $('.aboutClose').click(function() {
     $('.destinoInfo').hide();
 });
 
+$('.changeLocation').click(function() {
+    $('.inputDiv').show();
+    $('.inputDiv input').val($('.currentLocation').text());
+});
+
+$('.getText').click(function() {
+    $('.map').addClass('fadeOut');
+    setTimeout(function() {
+        $('.map').remove();
+        cancelAnimationFrame(animating);
+        $('.currentLocation').text($('.inputDiv input').val());
+        initMap($('.inputDiv input').val());
+    }, 990);
+    $('.inputDiv').hide();
+});
+
 $.getJSON('./cities.json', function(data) {
     d3.select('body').append('svg').attr('class', 'stars');
     createStars(data);
+    var randomData = data[getRandomInt(0, data.length)];
+    var str = randomData.name + ', ' + randomData.subcountry;
+    $('.currentLocation').text(str);
+    initMap(str);
 });
 
 var createStars = function(cities) {
